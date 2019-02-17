@@ -1,0 +1,513 @@
+muffin (3.6.1) batik; urgency=medium
+
+  * Pembaharuan Berkasd debian
+
+ -- Dindin Hernawan (Xenta OS) <dindin_hernawan@yahoo.com>  Sun, 17 Feb 2019 09:15:27 +0700 
+
+muffin (3.6.0+sylvia) sylvia; urgency=medium
+
+  [ Simon Brown ]
+  * x11/xprops: Plug a memory leak (#298)
+
+  [ Fabio Fantoni ]
+  * Remove old things from initial fork that seems not needed
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sat, 02 Sep 2017 16:56:12 -0400
+
+muffin (3.4.0) sonya; urgency=medium
+
+  [ leigh123linux ]
+  * change to sys/wait.h
+
+  [ JosephMcc ]
+  * Make meta_workspace_get_work_area_for_monitor public and introspectable
+  * keybindings: Remove redundant function declarations
+  * window: Remove duplicate function declarations
+  * workspace: Remove duplicate function declaration
+
+  [ Rowan Thorpe ]
+  * Fix meta_screen_get_monitor_geometry override redirect (#283)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 03 May 2017 13:36:53 +0100
+
+muffin (3.2.2) serena; urgency=medium
+
+  [ Michael Webster ]
+  * debian/control: Hardcode muffin-common dependencies - the generated .substvars file spits out a newer version of sgml-base than we have here (1.28 vs 1.26).
+
+  [ Clement Lefebvre ]
+  * Fix typo
+  * Make background transitions configurable
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sun, 08 Jan 2017 15:17:23 +0000
+
+muffin (3.2.1) serena; urgency=medium
+
+  * window groups: Don't assign IM popups to META_WINDOW_POPUP_MENU
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 23 Nov 2016 12:16:25 +0000
+
+muffin (3.2.0) serena; urgency=medium
+
+  [ itzexor ]
+  * meta-window-actor: fix unredirect heuristic Damage coordinates are relative to the drawable not to the screen. So we have to check whether x and y are 0 and not window_rect.x/y otherwise the herustic will never trigger for windows on monitors whos x and y are not 0.
+  * meta-window-actor: Consider needs_destroy in is_destroyed() According to the documentation, the method returns "whether the X window that the actor was displaying has been destroyed" - that is very much true when we delay the actual actor destruction for a destroy animation, so update the method accordingly.
+  * meta-window-actor: Do not request unredirection when destroyed WindowActors can outlive their corresponding window to animate unmap. Unredirecting the actor does not make sense in that case, so make sure to not request it.
+  * window-actor: Skip frame-sync when the corresponding window is gone https://git.gnome.org/browse/mutter/commit/?id=8d53ae8
+
+  [ Maximiliano Curia ]
+  * Migrate away from gnome-common deprecated vars and macros
+
+  [ brownsr ]
+  * remove deprecated unnecessary g_type_init calls
+
+  [ itzexor ]
+  * meta-window-actor: Change unredirection hints to match spec changes
+  * x11/window-props: Initialize bypass compositor hint
+
+  [ JosephMcc ]
+  * backgrounds: Add a simple crossfade effect on bg transitions
+  * backgrounds: Clean up a couple things
+  * compositor: Clean up a bunch of deprecated clutter functionality
+  * wm-tester: Clean up gtk deprecations
+  * Remove old references to tooltips
+  * frames: Remove expose_delayed
+
+  [ Lars Mueller ]
+  * Don't remove client-side frame extents when maximizing Fixing Cinnamon#5343
+
+  [ Michael Webster ]
+  * Add screen signal for skip_taskbar window hint changes.  This is needed by the window list applet in Cinnamon to know when to remove (or add) an item in the window list.
+  * cogl-utils.c: Don't skip error parameters.
+  * meta-window-actor.c: Only override the unredirect heuristic with our unredirect-fullscreen-windows preference.  This is based on a few assumptions:
+
+  [ Clement Lefebvre ]
+  * Fixed build
+
+  [ Maximiliano Curia ]
+  * Make AX_ macros optional
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 07 Nov 2016 10:49:02 +0000
+
+muffin (3.0.5) sarah; urgency=medium
+
+  [ JosephMcc ]
+  * cogl-utils: Don't set such a tight restriction on texture sizes
+
+  [ Michael Webster ]
+  * keybindings.c: Fix alignment calculation for handle_move_to - it was not accounting for GTK_FRAME_EXTENTS in the final x,y position.
+  * window.c: temporary workaround for gtk3 tooltip position bug and gtk 3.18.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 23 Jun 2016 13:37:13 +0100
+
+muffin (3.0.4) sarah; urgency=medium
+
+  [ brownsr ]
+  * remove unnecessary check https://github.com/GNOME/mutter/commit/9ca00d5cce2c5783c377b4df8b3f6820f9f357b0
+  * remove unused variable https://github.com/GNOME/mutter/commit/a6f206f07cf2fe7bc0c71ca5e571345f848efdbc#diff-5d2e6395ac2f32aae711a05663b64d18
+  * remove unused field https://github.com/GNOME/mutter/commit/73dbb4b9a52c651868057590e71616e8a5b726b2#diff-5d2e6395ac2f32aae711a05663b64d18
+  * remove unused description https://github.com/GNOME/mutter/commit/51acc3ee3178754b16b17362bb9b0395ef9a4e9b#diff-5d2e6395ac2f32aae711a05663b64d18   please check to see this looks right for muffin.  No regressions seen
+
+  [ itzexor ]
+  * autoconf: remove unneeded check for python python has never been used in muffin, this is a remnant from a workaround that was introduced to mutter in 2010, and removed before muffin was forked.
+
+  [ brownsr ]
+  * use g_clear_pointer to clean up finalization code https://github.com/GNOME/mutter/commit/079dd60e3d5cd6a6e1070f89f4f7277423bda727#diff-5d2e6395ac2f32aae711a05663b64d18
+  * window-actor: Remove custom region destruction methods with g_clear_p… …ointer https://github.com/GNOME/mutter/commit/53534b4ded26a392cce9b565de8b5d81cc904a0e#diff-5d2e6395ac2f32aae711a05663b64d18
+
+  [ Michael Webster ]
+  * constraints.c: ignore snapped windows whe maximizing desktop windows.
+
+  [ brownsr ]
+  * window-actor: fix leaked frame list https://github.com/GNOME/mutter/commit/4d437e32e069d348e9ff55bdaf34cfec60b0c7e3
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 20 May 2016 13:10:14 +0100
+
+muffin (3.0.3) sarah; urgency=medium
+
+  [ Michael Webster ]
+  * meta-window-actor.c: put META_WINDOW_DND-type windows in the regular window group (xdndHandler.js in cinnamon expects it there)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 11 May 2016 14:15:10 +0100
+
+muffin (3.0.2) sarah; urgency=medium
+
+  [ Michael Webster ]
+  * window.c: Handle META_TILE_MAXIMIZE in update_tile_mode, and move its call to handle both moving and resizing.  This prevents strange resize behavior when you move a window to an upper tile region without tiling it. Its tile state becomes inconsistent, and an attempt to resize it vertically ends up resizing in the wrong (or both) directions.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 10 May 2016 16:31:52 +0100
+
+muffin (3.0.1) sarah; urgency=medium
+
+  [ Michael Webster ]
+  * display.c: handle META_TILE_MAXIMIZE in meta_resize_gravity_from_tile_mode().
+  * tiling: Fix resizing of partially maximized windows -
+  * frames.c: don't infinite loop on the variants GList.  Make variable names less similar.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 06 May 2016 14:34:44 +0100
+
+muffin (3.0.0) sarah; urgency=medium
+
+  [ Michael Webster ]
+  * tiling: couple fixes. - wait to update window properties on tiled windows  until after the   window has been resized. - Remove the tiling property when a window is no longer tiled. - Remove a redundant check in the tiling keyboard handler.
+  * window.c: Fix maximization state when using tile hotkeys, clean up tile flags fully when the window is restored to normal.
+  * tiling: restore ability to resize tiled windows (from previous commit.)  Instead of first 'normalizing' the window temporarily, then restoring the tile state once the grab is complete, perform the resize while the window remains fully tiled.
+  * tiling:  Fix mouse/keyboard resizing
+  * Enable tiling from a non-drag-initiated mouse move (for instance, via hotkey or titlebar menu)
+  * keybindings.c: Get correct gravity during keyboard resize
+  * window.c: don't animate the end of a tile resizing.
+  * core: assume we always have a compositor
+  * muffin.c: Fix executable from crashing when x11 isn't explicitly set as the clutter backend.  We do this for cinnamon itself in cinnamon's main.c - it needs to be set before g_type_init.
+
+  [ itzexor ]
+  * theme.c: get style context state instead of using GTK_STATE_FLAG_NORMAL gtk 3.20 complains if the state passed doesn't match the context's current state. This quiets a lot of log spam when window focus changes.
+  * window.c: don't send configure notifies for OR windows this causes popup placement issues with gtk 3.20 as described in the mutter commit this is based on. the assertion is left out, as we still need to send configure notifies for OR windows in other cases.
+
+  [ JosephMcc ]
+  * prefs: Remove the live-hidden-windows preference. It's hardcoded to TRUE anyway
+  * Pull some upstream changes for mapping and unmapping windows GNOME/mutter@7cdf558 https://github.com/GNOME/mutter/commit/31afdd4debc9dd6494d292c2fcaefa0081cc81b3 https://github.com/GNOME/mutter/commit/604d2155ba7a2a227f3cc7efda1314c9a28fa0ce
+  * compositor: Rework handling of our top_window_group
+  * Improve tracking of fullscreen windows Based on https://github.com/GNOME/gnome-shell/commit/6119b447469c71c36b15c0d0fa8c1cfa24289778
+
+  [ Fantu ]
+  * update debian/copyright
+  * Fix ppc64el packages build
+  * Removed unneeded postinst and prerm files
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sun, 24 Apr 2016 12:24:06 +0100
+
+muffin (2.8.5) rosa; urgency=medium
+
+  [ Michael Webster ]
+  * tiling:  account for gtk frame extents when evaluating whether a c-s-d window can be tiled or not.
+  * prefs.c: Update keybindings even when the new keybinding is empty - this prevents old built-in (muffin) keybindings from continuing to work even after they've been cleared.
+  * prefs: don't attach modal dialogs by default
+  * cogl wrappers: Perform a sanity check on the width/height request and clamp the sizes to a maximum of (x) screen size.
+  * display.c: prevent assertion errors when clicking out of window menus.
+  * Disable frame sync when used when OpenGL version used by the driver is < 3.0.
+  * meta-sync-ring.c: simplify openGL version check to only check the major version number. Make the COGL_DRIVER_GL check a bit safer.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 07 Mar 2016 17:13:48 +0000
+
+muffin (2.8.4) rosa; urgency=medium
+
+  [ Michael Webster ]
+  * meta-window-actor.c: Remove duplicate call to meta_window_get_input_rect()
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 20 Nov 2015 17:25:58 +0000
+
+muffin (2.8.3) rosa; urgency=medium
+
+  [ leigh123linux ]
+  * Remove invalid (transfer) annnotations
+
+  [ Michael Webster ]
+  * keybindings: make rebuilding keybindings an idle function.  Prior to this, meta_display_rebuild_keybindings was called around 60 times at startup on my more-or-less stock desktop.  Now it is called approximately once, as an idle function, after all keybinding changes are complete.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 11 Nov 2015 18:40:40 +0000
+
+muffin (2.8.2) rosa; urgency=medium
+
+  [ JosephMcc ]
+  * Rework the strut handling code to better handle stacked monitor situations
+  * keybindings: Currently our move-to-center keybinding respects the current location of the mouse cursor when placing the window. Change the other move-window-to-* keybindings to match this behavior. Also fixes issues with window being placed incorrectly with regards to the panel on multi-monitors with mixed panel layouts.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 09 Nov 2015 10:58:27 +0000
+
+muffin (2.8.1) rosa; urgency=medium
+
+  [ JosephMcc ]
+  * constraints: clean up an unused variable
+
+  [ Clement Lefebvre ]
+  * Attach modal windows by default
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 19 Oct 2015 14:09:18 +0100
+
+muffin (2.8.0) rosa; urgency=medium
+
+  [ Michael Webster ]
+  * screen.c: Fix toggle-desktop behavior.
+  * Fix some warnings
+  * compositor.c: handle unstable API break
+  * Implement frame sync between apps and compositor.
+  * Add meta-sync-ring and nvidia patch -
+
+  [ Dexter Chua ]
+  * main.c: remove incorrect comment
+
+  [ JosephMcc ]
+  * Keybindings: Change how the "Center window is screen" hotkey works so it centers the window on the proper screen in multiple monitor setups and matches the placement of centered, newly opened windows
+  * screen: Add a public meta_screen_get_current_monitor(). A convenience function for getting the current monitor index for the cursor. Helpful when implementing features with proper multiple monitor support.
+  * Center attached dialogs on the parent window instead of the parents titlebar.
+  * Pull some upstream fixes from mutter to allow getting/setting a windows icon geometry. This will allow us to get a proper working minimize effect when using multiple panel applets
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 16 Oct 2015 14:19:13 +0100
+
+muffin (2.6.1) rafaela; urgency=medium
+
+  [ Dexter Chua ]
+  * Fix memory leak
+
+  [ Clement Lefebvre ]
+  * Revert "fix an issue where window turns to a solid colored rectangle during the destroy animation" (caused black borders/backgrounds in metacity themes)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sun, 31 May 2015 17:57:52 +0200
+
+muffin (2.6.0) rafaela; urgency=medium
+
+  * 2.6.0 
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 19 May 2015 17:29:31 +0200
+
+muffin (2.5.0) unstable; urgency=medium
+
+  * bump for development
+
+ -- Michael Webster <miketwebster@gmail.com>  Sat, 11 Apr 2015 08:46:16 -0400
+
+muffin (2.4.4) betsy; urgency=medium
+
+  * Add _NET_WM_STATE_MAXIMIZED_VERT to the _NET_WM_STATE for tiled windows.
+  * window menu: fix right-click support for client-side-decorated windows.
+  * Improved support for client-side-decorated windows:
+  * Fix c-s-d windows properly, to account for unscaled GTK_FRAME_EXTENTS.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 02 Feb 2015 17:02:03 +0100
+
+muffin (2.4.3) rebecca; urgency=medium
+
+  * Fixed scroll-zoom modifier mask
+  * Fixed freezing when receiving a Steam notification
+  * Fixed keybinding events not referencing X Windows, improve handling for hotkeys that use modifiers that are themselves hotkeys.
+  * Fixed dark theme variant support
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 15 Jan 2015 16:08:08 +0100
+
+muffin (2.4.2) rebecca; urgency=medium
+
+  * Frames: Fixed clicking maximize button from a top or bottom-tiled state
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sun, 23 Nov 2014 11:57:56 +0100
+
+muffin (2.4.1) rebecca; urgency=medium
+
+  * re-added keybindings schema to allow cinnamon-desktop migration script to work.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sat, 08 Nov 2014 10:02:10 +0100
+
+muffin (2.4.0) rebecca; urgency=medium
+
+  * 2.4.0
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 30 Oct 2014 15:19:45 +0100
+
+muffin (2.3.0) unstable; urgency=medium
+
+  * 2.3.0
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 27 Jun 2014 14:17:03 +0100
+
+muffin (2.2.6) qiana; urgency=medium
+
+  * 2.2.6
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 27 Jun 2014 14:15:03 +0100
+
+muffin (2.2.5) qiana; urgency=medium
+
+  * 2.2.5
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 21 May 2014 12:28:17 +0100
+
+muffin (2.2.4) qiana; urgency=medium
+
+  * 2.2.4
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 20 May 2014 14:18:59 +0100
+
+muffin (2.2.3) qiana; urgency=medium
+
+  * 2.2.3
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sun, 11 May 2014 10:02:29 +0100
+
+muffin (2.2.2) qiana; urgency=medium
+
+  * 2.2.2
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 01 May 2014 13:45:02 +0100
+
+muffin (2.2.1) qiana; urgency=medium
+
+  * 2.2.1
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 14 Apr 2014 14:16:24 +0100
+
+muffin (2.2.0) qiana; urgency=medium
+
+  * 2.2.0
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sat, 12 Apr 2014 12:48:12 +0100
+
+muffin (2.0.5) petra; urgency=low
+
+  * 2.0.5
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sat, 23 Nov 2013 13:42:23 +0000
+
+muffin (2.0.4) petra; urgency=low
+
+  * 2.0.4
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 07 Nov 2013 10:23:10 +0000
+
+muffin (2.0.3) petra; urgency=low
+
+  * 2.0.3
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 22 Oct 2013 14:38:50 +0100
+
+muffin (2.0.2) petra; urgency=low
+
+  * 2.0.2
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 17 Oct 2013 15:50:15 +0100
+
+muffin (2.0.1) petra; urgency=low
+
+  * 2.0.1
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 09 Oct 2013 10:49:23 +0100
+
+muffin (2.0.0) petra; urgency=low
+
+  * 2.0.0
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 07 Oct 2013 16:08:03 +0100
+
+muffin (1.9.1) petra; urgency=low
+
+  * 1.9.1
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 30 Sep 2013 12:07:31 +0100
+
+muffin (1.8.2) olivia; urgency=low
+
+  * 1.8.2
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sun, 19 May 2013 20:55:33 +0100
+
+muffin (1.8.1) olivia; urgency=low
+
+  * 1.8.1
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 09 May 2013 13:37:25 +0100
+
+muffin (1.8.0) olivia; urgency=low
+
+  * 1.8.0
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sun, 05 May 2013 12:08:27 +0100
+
+muffin (1.7.5) olivia; urgency=low
+
+  * 1.7.5
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 03 May 2013 17:09:46 +0100
+
+muffin (1.7.4) olivia; urgency=low
+
+  * 1.7.4
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sat, 27 Apr 2013 20:01:00 +0100
+
+muffin (1.7.3) olivia; urgency=low
+
+  * 1.7.3
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 15 Apr 2013 14:53:18 +0100
+
+muffin (1.7.2) olivia; urgency=low
+
+  * 1.7.2
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 05 Mar 2013 10:43:31 +0000
+
+muffin (1.7.1) olivia; urgency=low
+
+  * 1.7.1
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 21 Feb 2013 16:16:02 +0000
+
+muffin (1.1.2) nadia; urgency=low
+
+  * 1.1.2
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 23 Oct 2012 15:24:39 +0100
+
+muffin (1.1.1) maya; urgency=low
+
+  * 1.1.1
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 27 Sep 2012 14:30:13 +0100
+
+muffin (1.1.0) maya; urgency=low
+
+  * 1.1.0
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 17 Sep 2012 16:33:28 +0100
+
+muffin (1.0.9) maya; urgency=low
+
+  * 1.0.9 (skipped 1.0.8 and 1.0.7 due to a git rebase)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 05 Sep 2012 23:55:04 +0100
+
+muffin (1.0.6) maya; urgency=low
+
+  * 1.0.6
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 26 Jul 2012 23:23:20 +0100
+
+muffin (1.0.5) maya; urgency=low
+
+  * 1.0.5
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 24 Jul 2012 15:50:33 +0100
+
+muffin (1.0.4) maya; urgency=low
+
+  * 1.0.4
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 08 Jun 2012 15:47:55 +0100
+
+muffin (1.0.3-UP1) maya; urgency=low
+
+  * Fixed black borders (regression in GTK)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 18 May 2012 19:19:23 +0100
+
+muffin (1.0.3) maya; urgency=low
+
+  * 1.0.3
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 26 Apr 2012 11:41:00 +0000
+
+muffin (1.0.2) lisa; urgency=low
+
+  * 1.0.2
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 13 Mar 2012 15:55:26 +0000
+
+muffin (1.0.1) lisa; urgency=low
+
+  * 1.0.1
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 17 Feb 2012 10:57:41 +0000
+
+muffin (1.0.0) lisa; urgency=low
+
+  * Muffin, based on Mutter 3.2.1(-0ubuntu2)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 11 Jan 2012 18:04:13 +0000
